@@ -1,0 +1,28 @@
+{% extends './base.html' %}
+
+{% block title %}HOME{% endblock %}
+
+{% block customCSS %}
+
+{% endblock %}
+
+{% block body %}
+    <h1>BIENVENIDO,  {{ current_user.nombre }} {{ current_user.apellido}} </h1>
+    <table class="ui celled table">
+        <thead>
+          <tr><th>dni</th> 
+          <th>fecha de nacimiento</th>
+          <th>domicilio</th>
+          <th>email</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td data-label="dni">{{ current_user.dni }}</td>
+            <td data-label="fecha_nacimiento">{{ current_user.fecha_nacimiento }}</td>
+            <td data-label="domicilio">{{ current_user.domicilio }}</td>
+            <td data-label="email">{{ current_user.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    <a class="btn btn-secondary" href="{{ url_for('logout') }}">Logout</a>
+{% endblock %}

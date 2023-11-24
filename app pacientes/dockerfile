@@ -1,0 +1,30 @@
+FROM alpine:3.18
+
+RUN apk add --no-cache python3-dev build-base
+RUN apk add --no-cache py3-pip
+RUN pip install --upgrade pip 
+
+WORKDIR /app
+
+COPY . /app
+
+RUN pip install --upgrade pip setuptools
+RUN apk add postgresql-dev
+RUN pip install blinker==1.6.2
+RUN pip install click
+RUN pip install colorama==0.4.6
+RUN pip install Flask==3.0.0
+RUN pip install Flask-Login==0.6.3
+RUN pip install Flask-SQLAlchemy==3.1.1
+RUN pip install Flask-WTF==1.2.1
+RUN pip install itsdangerous==2.1.2
+RUN pip install Jinja2==3.1.2
+RUN pip install MarkupSafe==2.1.3
+RUN pip install psycopg2
+RUN pip install python-decouple==3.8
+RUN pip install SQLAlchemy==2.0.22
+RUN pip install typing_extensions==4.8.0
+RUN pip install Werkzeug==3.0.0
+RUN pip install WTForms==3.1.1
+
+CMD ["python3", "src/app.py"]

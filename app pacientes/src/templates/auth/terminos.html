@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Términos y Condiciones {%endblock %}</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    {% block customCSS %}
+    {% endblock %}
+    {% block navbar %}
+
+    <link rel="stylesheet" href=" {{url_for ('static', filename = 'css/navbar.css')}}">
+    {% include ("nav.html") %}
+
+    {% endblock %}
+ 
+</head>
+<body class = "text-start">
+{% block body %}
+    <h1 style = "text-align: center;"> TÉRMINOS Y CONDICIONES DE USO DE LA APLICACION </h1>
+    <p> Estos términos y condiciones ("Términos") son un acuerdo legal entre usted ("Usuario o "Paciente") y John Doe S.A. ("la Empresa", "nosotros"), propietaria
+        y operadora de la aplicacion. Al utilizar la aplicación, usted acepta cumplir con estos Terminos en su totalidad. Si no esta de acuerdo con
+        estos Términos, no utilice la aplicación.
+    </p>
+   
+    <p> 1. <strong>Registro de Datos del paciente: </strong> La aplicación permite a los Pacientes registrar sus datos personales, que serán
+    almacenados de forma segura en nuestra base de datos. </p>
+    <p> 2. <strong> Privacidad y Seguridad de los datos:</strong> Nos comprometemos a mantener la privacidad y seguridad de los datos de los 
+    Pacientes. La información registrada se utilizará únicamente con el propósito de mejorar la experiencia del usuario y proporcionar servicios
+    relacionados con la aplicación. </p>  
+    <p> 3. <strong> Acceso a la Página de Bienvenida: </strong> Una vez que un Paciente se haya registrado correctamente, podrá loguearse 
+    a la aplicacion y acceder a la página de bienvenida de la aplicación. Esta página esta diseñada para dar la bienvenida al Paciente y para 
+    poder desloguearse. </p>
+    <p> 4. <strong> Uso adecuado de la aplicación: </strong> Los Pacientes deben utilizar la aplicación de manera responsable y conforme a las leyes
+    y regulaciones aplicables. No se permite el uso indebido, abuso o violación de derechos de terceros a través de la aplicación. </p>
+    <p> 5. <strong> Modificaciones de los Términos y Condiciones: </strong> Nos reservamos el derecho de modificar estos términos y condiciones en
+    cualquier momento. Se le notificará sobre las modificaciones a traves de la aplicación o por otros medios adecuados. Es su responsabilidad
+    revisar periódicamente estos términos y condiciones. </p>
+    <p> 6. <strong> Finalización del Acceso: </strong> Podemos, a nuestra discreción, suspender o finalizar su acceso a la aplicación en caso de 
+    incumplimiento de estos términos y condiciones o por cualquier otra razón justificada.</p>
+    <p> Fecha de última actualización: 8/10/2023</p>
+{% endblock %}
+</body>
