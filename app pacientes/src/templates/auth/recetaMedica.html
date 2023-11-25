@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Receta Médica</title>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.1/css/bulma.min.css">
+</head>
+<body>
+    <h1 class="is-size-1" style="text-align: center;">Receta Médica</h1>
+    <form action="/generate_pdf" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="label">
+            <label class="label" for="nombre">Nombre:</label>
+            <input class="input" type="text" id="nombre" name="nombre" value="{{ current_user.nombre }} {{ current_user.apellido }}" readonly><br>
+        </div>
+        <div class="label">
+            <label class="label" for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" value="{{ current_user.dni }}" readonly><br>
+        </div>
+        <div class="label">
+            <label for="texto_usuario">Texto del Usuario:</label><br>
+            <textarea class="text" id="texto_usuario" name="texto_usuario" rows="4" cols="50" required></textarea><br>
+        </div>
+        
+        <input class="button is-primary" type="submit" value="Generar PDF">               
+    </form>
+</body>
+</html>

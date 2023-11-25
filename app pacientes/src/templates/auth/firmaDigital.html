@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Firma Digital de Documentos</title>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.1/css/bulma.min.css">
+    
+</head>
+
+<body>
+    <h1 class="is-size-1" style="text-align: center;">Receta Médica</h1>
+    
+    <section class="section">
+        <div class="columns">
+            <div class="column">
+                <h3 class="field"><strong>Debe cargar su firma en formato .p12</strong></h3>
+                <div class="field">
+                    <div class="file has-name">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="firma" required accept=".p12">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Seleccione la firma
+                                </span>
+                            </span>
+                            <span class="file-name" id="nombreFirma">
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <hr/>           
+                <form method="POST" action="{{url_for('procesar')}}" enctype="multipart/form-data">
+                    <div class="field">
+                        <label class="label">Debe introducir la contraseña de su archivo</label>
+                        <div class="control">
+                            <input class="input" name="palabra_secreta" required type="password"
+                                placeholder="Contraseña">
+                        </div>
+                    </div>
+                    
+                    
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input class="button is-primary" type="submit" value="Firmar">
+                </form>
+            </div>
+
+        </div>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const $pdf = document.querySelector("[name='pdf']");
+            const $nombrePdf = document.querySelector("#nombrePdf");
+            const $firma = document.querySelector("[name='firma']");
+            const $nombreFirma = document.querySelector("#nombreFirma");
+            $pdf.onchange = () => {
+                if ($pdf.files.length <= 0) {
+                    $nombrePdf.textContent = "";
+                    return;
+                }
+                const archivo = $pdf.files[0];
+                $nombrePdf.textContent = archivo.name;
+            };
+
+            $firma.onchange = () => {
+                if ($firma.files.length <= 0) {
+                    $nombreFirma.textContent = "";
+                    return;
+                }
+                const archivo = $firma.files[0];
+                $nombreFirma.textContent = archivo.name;
+            };
+        });
+    </script>
+</body>
+
+</html>
