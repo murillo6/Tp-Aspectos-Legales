@@ -1,30 +1,51 @@
-FROM alpine:3.18
-
-RUN apk add --no-cache python3-dev build-base
-RUN apk add --no-cache py3-pip
-RUN pip install --upgrade pip 
-
+#syntax=docker/dockerfile:1
+FROM python:3.9.18-alpine3.18
 WORKDIR /app
 
 COPY . /app
+RUN pip install --upgrade pip
+RUN    asn1crypto==1.5.1
+RUN    attrs==23.1.0
+RUN    bcrypt==4.0.1
+RUN    blinker==1.6.2
+RUN    certifi==2023.11.17
+RUN    certvalidator==0.11.1
+RUN    cffi==1.16.0
+#RUN    charset-normalizer
+RUN    click==8.1.7
+RUN    colorama==0.4.6
+RUN    cryptography==41.0.5
+RUN    endesive==2.16
+RUN    Flask==3.0.0
+RUN    Flask-Login==0.6.3
+RUN    Flask-MySQLdb==2.0.0
+RUN  Flask-SQLAlchemy==3.1.1
+RUN    Flask-WTF==1.2.1
+RUN    greenlet==3.0.0
+RUN    idna==3.4
+RUN    itsdangerous==2.1.2
+RUN    Jinja2==3.1.2
+RUN    lxml==4.9.3
+RUN    MarkupSafe==2.1.3
+RUN    mysqlclient==2.2.0
+RUN    oscrypto==1.3.0
+RUN    paramiko==3.3.1
+RUN    Pillow==10.1.0
+RUN    psycopg2==2.9.9
+RUN    pycparser==2.21
+RUN    PyKCS11==1.5.12
+RUN    PyNaCl==1.5.0
+RUN    python-decouple==3.8
+RUN    python-dotenv==1.0.0
+RUN    pytz==2023.3.post1
+RUN    reportlab==4.0.7
+RUN    requests==2.31.0
+RUN    SQLAlchemy==2.0.22
+RUN    typing_extensions==4.8.0
+RUN    urllib3==2.1.0
+RUN    Werkzeug==3.0.0
+RUN WTForms==3.1.1
 
-RUN pip install --upgrade pip setuptools
-RUN apk add postgresql-dev
-RUN pip install blinker==1.6.2
-RUN pip install click
-RUN pip install colorama==0.4.6
-RUN pip install Flask==3.0.0
-RUN pip install Flask-Login==0.6.3
-RUN pip install Flask-SQLAlchemy==3.1.1
-RUN pip install Flask-WTF==1.2.1
-RUN pip install itsdangerous==2.1.2
-RUN pip install Jinja2==3.1.2
-RUN pip install MarkupSafe==2.1.3
-RUN pip install psycopg2
-RUN pip install python-decouple==3.8
-RUN pip install SQLAlchemy==2.0.22
-RUN pip install typing_extensions==4.8.0
-RUN pip install Werkzeug==3.0.0
-RUN pip install WTForms==3.1.1
+
 
 CMD ["python3", "src/app.py"]

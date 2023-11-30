@@ -202,8 +202,9 @@ def generate_pdf():
     pdf_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'receta_medica.pdf')
     with open(pdf_filename, 'wb') as pdf_file:
         pdf_file.write(pdf_bytes.read())
-
+   
     # Redirigir a la otra función con la ruta del archivo PDF
+    #print("-------CONTROLCONTROL----", pdf_filename)
     return redirect(url_for('proceso', pdf_filename=pdf_filename))
    
    #PARA MOSTRAR POR PANTALLA 
@@ -220,23 +221,32 @@ def proceso():
 
 @app.route('/procesar',  methods=['POST'])
 def procesar():
-   print("----------CONTROL-----------")
-   pdf = request.args.get('pdf_filename')
+   #print("----------CONTROL-----------")
+   pdf= os.path.join(app.config['UPLOAD_FOLDER'], 'receta_medica.pdf')
+   
+        
+   #pdf = request.args.get('receta_medica.pdf')
+   #print(f"PDF: {pdf}")
    #pdf = request.files.get("pdf")
    firma = request.files.get("firma")
+   #print("----------FIRMA---------",firma)
    contraseña = request.form.get("palabra_secreta")
    archivo_pdf_para_enviar_al_cliente = io.BytesIO()
-   print("----------CONTROL2-----------")
+   #print("----------ANTES del TRY-----------")
    try:
-        datau, datas = firmar(contraseña, firma, pdf)
-        archivo_pdf_para_enviar_al_cliente.write(datau)
-        archivo_pdf_para_enviar_al_cliente.write(datas)
-        archivo_pdf_para_enviar_al_cliente.seek(0)
-        return send_file(archivo_pdf_para_enviar_al_cliente, mimetype="application/pdf",
-                         download_name="firmado" + ".pdf",
-                         as_attachment=True)
+      print("----------CONTRdsadasdasOL-----------")
+      datau, datas = firmar(contraseña, firma, pdf)
+      print("----------CONTROL-----------")
+      archivo_pdf_para_enviar_al_cliente.write(datau)
+      print("---------COntrol1-------------")
+      archivo_pdf_para_enviar_al_cliente.write(datas)
+      print("---------COntrol2-------------")
+      archivo_pdf_para_enviar_al_cliente.seek(0)
+      return send_file(archivo_pdf_para_enviar_al_cliente, mimetype="application/pdf",
+                        download_name="firmado" + ".pdf",
+                        as_attachment=True)
    except ValueError as e:
-        return "Error firmando: " + str(e) + " . Se recomienda revisar la contraseña y el certificado"
+      return "Error firmando: " + str(e) + " . Se recomienda revisar la contraseña y el certificado"
 
 if __name__ == '__main__':
    app.config.from_object(config['development'])
